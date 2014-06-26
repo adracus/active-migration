@@ -5,6 +5,10 @@ description: A pub package
 homepage: https://github.com/Adracus/ActiveMigration/tree/master
 documentation: https://github.com/Adracus/ActiveMigration/tree/master
 dependencies:
-  activerecord: ">=2.0.2 <3.0.0"
-  postgres_adapter: ">=0.0.3 <0.1.0"
-  yaml: ">=0.1.0 <1.0.0"
+  activerecord:
+    git: https://github.com/Adracus/ActiveRecord
+    version: '>=2.0.2 <3.0.0'
+  postgres_adapter:
+    git: https://github.com/Adracus/PostgresAdapter.git
+    version: '>=0.0.6 <0.1.0'
+  yaml: '>=0.1.0 <1.0.0'

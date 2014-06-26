@@ -1,3 +1,7 @@
 development:
   adapter: postgres
-  test: true
+  username: dartman
+  password: password
+  host: localhost
+  port: 5432
+  database: dartbase

@@ -2,6 +2,7 @@ library activemigration;
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:mirrors';
 
 import 'package:postgres_adapter/postgres_adapter.dart';
 import 'package:activerecord/activerecord.dart';
@@ -32,4 +33,8 @@ class Configuration {
   operator[](String key) => _doc[key];
   String get adapterName => _doc["adapter"];
   toString() => "$environment: configs: $_doc";
+  DatabaseAdapter get adapter {
+    var clazz = reflectClass(lookup[adapterName.toLowerCase()]);
+    return clazz.newInstance(new Symbol(''), [this]).reflectee;
+  }
 }
