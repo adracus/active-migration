@@ -7,8 +7,8 @@ documentation: https://github.com/Adracus/ActiveMigration/tree/master
 dependencies:
   activerecord:
     git: git://github.com/Adracus/ActiveRecord.git
-    version: '>=2.0.2 <3.0.0'
+    version: any
   postgres_adapter:
     git: https://github.com/Adracus/PostgresAdapter.git
-    version: '>=0.0.6 <0.1.0'
+    version: any
   yaml: '>=0.1.0 <1.0.0'
