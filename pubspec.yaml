@@ -1,0 +1,7 @@
+name: ActiveMigration
+description: A pub package
+dependencies:
+  activerecord: any
+  args: any
+  postgres_adapter: any
+  yaml: any
