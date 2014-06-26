@@ -6,7 +6,7 @@ homepage: https://github.com/Adracus/ActiveMigration/tree/master
 documentation: https://github.com/Adracus/ActiveMigration/tree/master
 dependencies:
   activerecord:
-    git: https://github.com/Adracus/ActiveRecord
+    git: git://github.com/Adracus/ActiveRecord.git
     version: '>=2.0.2 <3.0.0'
   postgres_adapter:
     git: https://github.com/Adracus/PostgresAdapter.git
