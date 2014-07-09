@@ -11,7 +11,7 @@ void main(List<String> arguments) {
       negatable: false, callback: _help);
   var result = parser.parse(arguments);
   
-  if(result.rest.length == 2) {
+  if(result.rest.length == 3) {
     var since = result["since"] == null? null : new File(result["since"]);
     createMigrator(result.rest[0], since, new File(result.rest[1]), 
         findMigrationFiles(new File(result.rest[2]))).then((file) {

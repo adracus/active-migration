@@ -5,21 +5,20 @@ import 'dart:io';
 import 'dart:mirrors';
 
 import 'package:activerecord/activerecord.dart';
-import 'adapters/postgres_adapter.dart';
 import 'package:yaml/yaml.dart';
 import 'package:path/path.dart';
 import 'package:codewriter/codewriter.dart';
 
-export 'adapters/postgres_adapter.dart';
-
-part 'database_adapter.dart';
+// Adapters:
+import 'package:postgres_adapter/postgres_adapter.dart';
 
 const lookup = const {
   "postgres": PostgresAdapter
 };
 
 Future<File> createMigrator(String env, File fromFile,
-    File configFile, List<MigrationFile> migrationFiles) {
+    File configFile, List<MigrationFile> migrationFiles,
+    {bool doMigration: true}) {
   var from = readTimestampFile(fromFile);
   var file = new StandardFile("migrator_tmp.dart");
   file.addImport(new Import("io"));
@@ -35,8 +34,11 @@ Future<File> createMigrator(String env, File fromFile,
     if (from != null && migrationFiles[i].timestamp.isBefore(from)) break;
     main.addExpression(
         new UserExpression("var mig$i = new " +
-            "${migrationFiles[i].className}();"));
-    main.addExpression(new UserExpression("fs.add(mig$i.up(config.adapter));"));
+            "${migrationFiles[i].className}(config.adapter);"));
+    if(doMigration)
+      main.addExpression(new UserExpression("fs.add(mig$i.up());"));
+    else
+      main.addExpression(new UserExpression("fs.add(mig$i.down());"));
   }
   writeMigrationTimestamp(fromFile, new DateTime.now());
   main.addExpression(
@@ -64,8 +66,10 @@ DateTime readTimestampFile(File f) {
 }
 
 abstract class Migration {
-  Future up(DatabaseAdapter adapter);
-  Future down(DatabaseAdapter adapter);
+  final DatabaseAdapter adapter;
+  Migration(this.adapter);
+  Future up();
+  Future down();
 }
 
 String parseMigrationClass(File migrationFile) {

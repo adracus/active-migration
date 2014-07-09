@@ -1,11 +1,12 @@
 name: activemigration
-version: 0.1.0
+version: 0.2.0
 author: Axel Christ <adracus@gmail.com>
 description: A pub package
 homepage: https://github.com/Adracus/ActiveMigration/tree/master
 documentation: https://github.com/Adracus/ActiveMigration/tree/master
 dependencies:
-  activerecord: '>=2.1.0 <2.2.0'
+  activerecord: '>=2.3.0 <3.0.0'
+  postgres_adapter: 
   args: '>=0.11.0 <0.12.0'
   codewriter: '>=0.2.2 <0.3.0'
   path: '>=1.2.1 <1.3.0'

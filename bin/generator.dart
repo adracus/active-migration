@@ -18,12 +18,14 @@ Future<File> _generateMigration(String name, [String loc]) {
   var path = loc == null ? "$now\_$name.dart" : "$loc/$now\_$name.dart";
   var f = new File(path);
   var sink = f.openWrite();
-  sink.writeln("//$now");
+  sink.writeln("//$name");
   sink.writeln('import "dart:async";');
+  sink.writeln('import "package:activerecord/activerecord.dart";');
   sink.writeln('import "package:activemigration/activemigration.dart";');
   sink.writeln("class $name extends Migration {");
-  sink.writeln("  Future up(DatabaseAdapter adapter) => null;");
-  sink.writeln("  Future down(DatabaseAdapter adapter) => null;");
+  sink.writeln("  $name(DatabaseAdapter adapter): super(adapter);");
+  sink.writeln("  Future up() => null;");
+  sink.writeln("  Future down() => null;");
   sink.writeln("}");
   return sink.flush().then((_) => f);
 }
