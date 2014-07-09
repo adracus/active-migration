@@ -60,3 +60,14 @@ This script needs one or two arguments:
 This generates the Migration with the specified name at the
 specified location. If no location was specified, the Migration will
 be created at the place from where you ran the generator script.
+
+## Installing the tools
+It would be quite lame if you had to type dart generator.dart (arguments here), as well
+as dart migrator.dart (arguments) everytime. For this reason, I created an installer,
+makes the tools available via the `amg` command. You're then able to use `amg generate`
+or `amg migrate`, which then hands over the arguments to the different tools.
+To install the tools under linux, simply paste this line into your terminal and execute it:
+
+```shell
+wget -qO- https://raw.githubusercontent.com/Adracus/ActiveMigration/master/bin/install.sh | sudo bash
+```
